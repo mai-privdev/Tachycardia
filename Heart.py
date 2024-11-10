@@ -11,3 +11,7 @@ class Heart:
     def heartscare(self):
         self.CurrentBPM += 10
         return(self.CurrentBPM)
+
+    def heartalcohol(self):
+        self.CurrentBPM -= 50
+        return(self.CurrentBPM)
