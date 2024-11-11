@@ -6,9 +6,9 @@ class Heart:
 
     def relax(self):
         if self.CurrentBPM < 60:
-            self.CurrentBPM += 5
+            self.CurrentBPM += 1
         else:
-            self.CurrentBPM -= 5
+            self.CurrentBPM -= 2
         return(self.CurrentBPM)
 
     def heartscare(self):
