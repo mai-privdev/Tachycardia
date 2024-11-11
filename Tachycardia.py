@@ -10,6 +10,7 @@ heart = Heart.Heart(60,200)
 white = (255, 255, 255)
 black = (0, 0, 0)
 red = (255, 0 , 0)
+blood = (115, 0, 5)
 green = (0, 255, 0)
 blue = (0, 0, 128)
 #Display
@@ -19,7 +20,7 @@ Y = 400
 display_surface = pygame.display.set_mode((X, Y))
  
 screen = pygame.display.set_mode((800, 600))
-font = pygame.font.Font('freesansbold.ttf', 32)
+font = pygame.font.Font('/home/mai/Documents/Lessons/Computer Science Lessons/Lesson scripts/Project/Font/Necropsia.ttf', 32)
 
 
  
@@ -30,33 +31,47 @@ globalclock = pygame.time.Clock()
 time = 0
 
 #Checks
-REST = pygame.USEREVENT + 1
-CHECK2 = False
+STEADY = pygame.USEREVENT + 1
+HOMEOSTAIS = pygame.USEREVENT + 2
 
-#Timers
-pygame.time.set_timer(REST, 100) #tick between 
-
-bpmraised = False
+#Needed base variables
 count = 0
+Calm = False
+
+#Functions
+def Stressed(Calm):
+    Calm = False
+    pygame.time.set_timer(STEADY, 5000) #countdown til heart begins to decrease
+    return(Calm)
+
+
+
+
 while True:
-    #event checkers
-    for event in pygame.event.get():   
-        if event.type == pygame.quit:
+    for event in pygame.event.get(): 
+        #event checkers 
+        # Quit 
+        if event.type == pygame.locals.QUIT:
             pygame.quit()
-            quit()
-        if event.type == REST:
-            count += 1
-            print(count)
-            print(round(time, 5))
-
-    if bpmraised == True:
-        count = 0        
-    if count == 10:
-        heart.relax()
-        count = 0
-        print(heart.CurrentBPM)
-
-    #display
+            sys.exit()
+        # Calm Cooldown
+        if event.type == STEADY:
+            Calm = True
+            print("Calm = true")
+        if event.type == HOMEOSTAIS:
+            heart.relax()
+            print("relax")
+            Calm = True
+        # Test 
+        if event.type == pygame.locals.KEYUP:
+            if event.key == K_x:
+                heart.heartfear()
+                Stressed(Calm)
+    
+    if Calm == True:
+        print("timer on")
+        pygame.time.set_timer(HOMEOSTAIS, 1000)
+        Calm = False        
     
 
     #bugtest timer
@@ -66,15 +81,12 @@ while True:
     #print(round(time, 5))
 
     #updates heartrate
-    text = font.render(str(heart.CurrentBPM), True, red, black)
+    text = font.render(str(heart.CurrentBPM), True, blood, red)
     textRect = text.get_rect()
     textRect.center = (X // 2, Y // 2)
     #display
     display_surface.blit(text, textRect)
     #screen update
     pygame.display.update()
-    
 
 
-    
-        
