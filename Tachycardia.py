@@ -24,8 +24,6 @@ font = pygame.font.Font('/home/mai/Documents/Lessons/Computer Science Lessons/Le
 
 
  
-# set the center of the rectangular object.
-
 # Background clock
 globalclock = pygame.time.Clock()
 time = 0
@@ -41,6 +39,9 @@ Calm = False
 #Functions
 def Stressed(Calm):
     Calm = False
+    print("calming")
+    #turns off homeostasis for 5 seconds
+    pygame.event.set_blocked(HOMEOSTAIS)
     pygame.time.set_timer(STEADY, 5000) #countdown til heart begins to decrease
     return(Calm)
 
@@ -48,30 +49,37 @@ def Stressed(Calm):
 
 
 while True:
+    
     for event in pygame.event.get(): 
         #event checkers 
+        # Quit 
         # Quit 
         if event.type == pygame.locals.QUIT:
             pygame.quit()
             sys.exit()
         # Calm Cooldown
         if event.type == STEADY:
+            pygame.event.set_allowed(HOMEOSTAIS)
             Calm = True
             print("Calm = true")
+        #homeostasis 1 sec tick loop
         if event.type == HOMEOSTAIS:
             heart.relax()
             print("relax")
             Calm = True
-        # Test 
+        #test scare input
         if event.type == pygame.locals.KEYUP:
             if event.key == K_x:
                 heart.heartfear()
-                Stressed(Calm)
+                Stressed(Calm)    
     
     if Calm == True:
         print("timer on")
-        pygame.time.set_timer(HOMEOSTAIS, 1000)
-        Calm = False        
+        pygame.time.set_timer(HOMEOSTAIS, 1000, 160)
+        Calm = False
+    
+
+       
     
 
     #bugtest timer
