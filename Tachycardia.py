@@ -4,6 +4,8 @@ from pygame.locals import *
 pygame.init()
 #
 import Heart
+import Menu
+
 
 heart = Heart.Heart(60,200)
 #Colours
@@ -14,13 +16,16 @@ blood = (115, 0, 5)
 green = (0, 255, 0)
 blue = (0, 0, 128)
 #Display
-X = 400
-Y = 400
+MenuX = 400
+MenuY = 400
+GameX = 896
+GameY = 504
 
-display_surface = pygame.display.set_mode((X, Y))
- 
-screen = pygame.display.set_mode((800, 600))
-font = pygame.font.Font('/home/mai/Documents/Lessons/Computer Science Lessons/Lesson scripts/Project/Font/Necropsia.ttf', 32)
+menu_screen = pygame.display.set_mode((MenuX, MenuY))
+game_screen = pygame.display.set_mode((GameX, GameY))
+
+
+font_necropsia = pygame.font.Font('/home/mai/Documents/Lessons/Computer Science Lessons/Lesson scripts/Project/Font/Necropsia.ttf', 32)
 
 
  
@@ -35,8 +40,10 @@ HOMEOSTAIS = pygame.USEREVENT + 2
 #Needed base variables
 count = 0
 Calm = False
-
+GameActive = True
 #Functions
+
+
 def Stressed(Calm):
     Calm = False
     print("calming")
@@ -46,9 +53,11 @@ def Stressed(Calm):
     return(Calm)
 
 
+Menu()
+
+while GameActive == True:
 
 
-while True:
     
     for event in pygame.event.get(): 
         #event checkers 
@@ -89,11 +98,11 @@ while True:
     #print(round(time, 5))
 
     #updates heartrate
-    text = font.render(str(heart.CurrentBPM), True, blood, red)
+    text = font_necropsia.render(str(heart.CurrentBPM), True, blood, red)
     textRect = text.get_rect()
-    textRect.center = (X // 2, Y // 2)
+    textRect.center = (GameX // 2, GameY // 2)
     #display
-    display_surface.blit(text, textRect)
+    game_screen.blit(text, textRect)
     #screen update
     pygame.display.update()
 
