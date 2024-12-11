@@ -53,7 +53,7 @@ def Stressed(Calm):
     return(Calm)
 
 
-Menu()
+#Menu()
 
 while GameActive == True:
 
@@ -61,11 +61,12 @@ while GameActive == True:
     
     for event in pygame.event.get(): 
         #event checkers 
-        # Quit 
-        # Quit 
+        # Quit to desktop
         if event.type == pygame.locals.QUIT:
             pygame.quit()
             sys.exit()
+        # Quit to menu
+        
         # Calm Cooldown
         if event.type == STEADY:
             pygame.event.set_allowed(HOMEOSTAIS)
@@ -84,7 +85,7 @@ while GameActive == True:
     
     if Calm == True:
         print("timer on")
-        pygame.time.set_timer(HOMEOSTAIS, 1000, 160)
+        pygame.time.set_timer(HOMEOSTAIS, 1000, 200)
         Calm = False
     
 
