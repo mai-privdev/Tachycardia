@@ -1,13 +1,3 @@
-# Imported modules
-import pygame, sys
-from pygame.locals import *
-pygame.init()
-#
-import Heart
-import Menu
-
-
-heart = Heart.Heart(60,200)
 #Colours
 white = (255, 255, 255)
 black = (0, 0, 0)
@@ -21,11 +11,25 @@ MenuY = 400
 GameX = 896
 GameY = 504
 
+font_necropsia = pygame.font.Font('/home/mai/Documents/Lessons/Computer Science Lessons/Lesson scripts/Project/Font/Necropsia.ttf', 32)
+
+# Imported modules
+import pygame, sys, numpy
+from pygame.locals import *
+pygame.init()
+
+#
+import Heart
+import Menu
+import TileSys 
+
+heart = Heart.Heart(60,200)
+
 menu_screen = pygame.display.set_mode((MenuX, MenuY))
 game_screen = pygame.display.set_mode((GameX, GameY))
 
 
-font_necropsia = pygame.font.Font('/home/mai/Documents/Lessons/Computer Science Lessons/Lesson scripts/Project/Font/Necropsia.ttf', 32)
+
 
 
  
