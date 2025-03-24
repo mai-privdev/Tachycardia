@@ -1,8 +1,10 @@
 class Menu:
-    def __init__(self, length, width, text, title):
+    def __init__(self, length, width, font, title):
         self.length = length
         self.width = width
-        self.text = text
+        self.font = font
         self.title = title
     
-    def render(self):
+    def load(self):
+        menu_screen = pygame.display.set_mode((self.length, self.width))
+

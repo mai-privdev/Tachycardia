@@ -23,9 +23,10 @@ import Heart
 import Menu
 import TileSys 
 
+Menu = Menu.Menu(MenuX, MenuY, font_necropsia, "Tachycardia")
 heart = Heart.Heart(60,200)
 
-menu_screen = pygame.display.set_mode((MenuX, MenuY))
+
 game_screen = pygame.display.set_mode((GameX, GameY))
 
 
@@ -58,7 +59,8 @@ def Stressed(Calm):
 
 
 #Menu()
-
+if GameActive == False:
+    
 while GameActive == True:
 
 
