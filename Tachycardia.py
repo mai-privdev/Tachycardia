@@ -1,3 +1,16 @@
+
+# Imported modules
+import pygame, sys, numpy
+from pygame.locals import *
+pygame.init()
+
+import Heart
+import Menu
+#import TileSys
+
+
+
+
 #Colours
 white = (255, 255, 255)
 black = (0, 0, 0)
@@ -10,24 +23,16 @@ MenuX = 400
 MenuY = 400
 GameX = 896
 GameY = 504
+titlefont_insomnia = pygame.font.Font('/home/mai/Documents/A level/Lessons/Computer Science Lessons/Lesson scripts/Project/Assets/Font/Insomnia 1.ttf', 42)
+font_insomnia = pygame.font.Font('/home/mai/Documents/A level/Lessons/Computer Science Lessons/Lesson scripts/Project/Assets/Font/Insomnia 1.ttf', 32)
+font_necropsia = pygame.font.Font('/home/mai/Documents/A level/Lessons/Computer Science Lessons/Lesson scripts/Project/Assets/Font/Necropsia.ttf', 32)
 
-font_necropsia = pygame.font.Font('/home/mai/Documents/Lessons/Computer Science Lessons/Lesson scripts/Project/Font/Necropsia.ttf', 32)
+game_screen = pygame.display.set_mode((GameX, GameY))
 
-# Imported modules
-import pygame, sys, numpy
-from pygame.locals import *
-pygame.init()
-
-#
-import Heart
-import Menu
-import TileSys 
-
-Menu = Menu.Menu(MenuX, MenuY, font_necropsia, "Tachycardia")
+Menu = Menu.Menu(MenuX, MenuY, font_insomnia, titlefont_insomnia, "Tachycardia", game_screen)
 heart = Heart.Heart(60,200)
 
 
-game_screen = pygame.display.set_mode((GameX, GameY))
 
 
 
@@ -45,7 +50,7 @@ HOMEOSTAIS = pygame.USEREVENT + 2
 #Needed base variables
 count = 0
 Calm = False
-GameActive = True
+GameActive = False
 #Functions
 
 
@@ -60,11 +65,14 @@ def Stressed(Calm):
 
 #Menu()
 if GameActive == False:
+    Menu.load()
+    MenuActive = True
+    while MenuActive == True:
+        mouse = pygame.mouse.get_pos()
+        Menu.update(mouse)
+        
     
-while GameActive == True:
-
-
-    
+while GameActive == True:  
     for event in pygame.event.get(): 
         #event checkers 
         # Quit to desktop
