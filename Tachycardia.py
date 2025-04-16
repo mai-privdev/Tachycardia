@@ -62,6 +62,10 @@ def Stressed(Calm):
     pygame.time.set_timer(STEADY, 5000) #countdown til heart begins to decrease
     return(Calm)
 
+''' 
+MAIN GAME LOOPS
+'''
+
 
 #Menu()
 if GameActive == False:
@@ -69,7 +73,9 @@ if GameActive == False:
     MenuActive = True
     while MenuActive == True:
         mouse = pygame.mouse.get_pos()
-        Menu.update(mouse)
+        #print(mouse)
+        Menu.update()
+
         
     
 while GameActive == True:  
@@ -101,9 +107,6 @@ while GameActive == True:
         print("timer on")
         pygame.time.set_timer(HOMEOSTAIS, 1000, 200)
         Calm = False
-    
-
-       
     
 
     #bugtest timer
