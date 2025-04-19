@@ -1,8 +1,23 @@
+import Tachycardia
+
+
 class Heart:
     def __init__(self,RestBPM,MaxBPM):
         self.RestBPM = RestBPM
         self.MaxBPM = MaxBPM
         self.CurrentBPM = self.RestBPM
+        self.bloodcolour = (115, 0, 5)
+        self.heartcolour = (255, 0, 0)
+
+
+
+
+
+
+    def update(self):
+        text = font_necropsia.render(str(heart.CurrentBPM), True, self.bloodcolour, self.heartcolour)
+        textRect = text.get_rect()
+        textRect.center = (GameX * 0.1, GameY * 0.9)
 
     def relax(self):
         if self.CurrentBPM < 60:
