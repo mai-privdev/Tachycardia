@@ -6,7 +6,7 @@ GameState = 1
 
 
 # Imported modules
-import pygame, sys, numpy
+import pygame, sys, numpy, json
 from pygame.locals import *
 pygame.init()
 
@@ -16,9 +16,6 @@ import Display
 pygame.display.init()
 pygame.font.init()
 #import TileSys
-
-
-
 
 
 #Colours
