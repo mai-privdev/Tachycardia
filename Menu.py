@@ -1,9 +1,12 @@
-import pygame, sys, numpy, Tachycardia, json
+#Menu
+import pygame, sys, numpy, json
 from pygame.locals import *
 pygame.init()
 
 class Menu:
     def __init__(self, font, titlefont, title):
+        import Tachycardia, Display
+        Display = Display.Display()
         self.width = 400
         self.height = 400
         self.font = font
@@ -47,22 +50,13 @@ class Menu:
     
 
     
-    def update(self):
+    def update(self, current_resolution):
         #clears previous cycle
         self.screen.fill(self.Black)
+        mouse = pygame.mouse.get_pos()
         #Main Menu
         if self.MenuState == 0:
-            #Title
-            self.screen.blit(self.titlefont.render(self.title, True, self.Red), (self.width*0.1, self.height*0.15))
-            #start/levels
-            self.screen.blit(self.font.render("Start", True, self.white) , (self.width*0.25,self.height*0.4))
-            #Options
-            self.screen.blit(self.font.render("Options", True, self.white) , (self.width*0.25,self.height*0.6))
-            #Quit
-            self.screen.blit(self.font.render("Quit", True, self.white) , (self.width*0.25,self.height*0.8))
-
-            mouse = pygame.mouse.get_pos()
-
+             
             if (self.width*0.25 <= mouse[0] <= self.width*0.75) and (self.height*0.4 <= mouse[1] <= self.height*0.9):
                 if self.height*0.4 <= mouse[1] <= self.height*0.5:
                     self.buttonhighlighcount.append(0)
@@ -89,18 +83,17 @@ class Menu:
                     if event.type == pygame.MOUSEBUTTONDOWN:
                             #Level Select
                         if self.height*0.4 <= mouse[1] <= self.height*0.5:
-                            print("click 1")
+                            print("Levels")
                             self.MenuState = 1
                             
                             #Options
                         if self.height*0.6 <= mouse[1] <= self.height*0.7:
-                            print("click 2")
+                            print("Options")
                             self.MenuState = 2
 
                             #Quit
                         if self.height*0.8 <= mouse[1] <= self.height*0.9:
-                            print("Click 3")
-                            GameState = 0
+                            print("Quit")
                             return(0)
 
                             
@@ -117,16 +110,7 @@ class Menu:
         #Levels Menu
         if self.MenuState == 1:
             self.screen.fill(self.Black)
-            self.screen.blit(self.titlefont.render("Level Select", True, self.Red), (self.width*0.1, self.height*0.15))
-            #start/levels
-            self.screen.blit(self.font.render("Level I", True, self.white) , (self.width*0.25,self.height*0.4))
-            #Options
-            self.screen.blit(self.font.render("LOCKED", True, self.white) , (self.width*0.25,self.height*0.6))
-            #Quit
-            self.screen.blit(self.font.render("Return", True, self.white) , (self.width*0.25,self.height*0.8))
-
-            mouse = pygame.mouse.get_pos()
-
+             
             if (self.width*0.25 <= mouse[0] <= self.width*0.75) and (self.height*0.4 <= mouse[1] <= self.height*0.9):
                 if self.height*0.4 <= mouse[1] <= self.height*0.5:
                     self.buttonhighlighcount.append(0)
@@ -152,6 +136,60 @@ class Menu:
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         #lvl 1
                         if self.height*0.4 <= mouse[1] <= self.height*0.5:
+                            print("Level 1")
+                            return(2)
+                            
+            
+                        #Lvl 2 (Doesnt exist)
+                        if self.height*0.6 <= mouse[1] <= self.height*0.7:
+                            pass
+
+                        #return
+                        if self.height*0.8 <= mouse[1] <= self.height*0.9:
+                            print("Return")
+                            self.MenuState = 0
+
+                            
+
+            #Title
+            self.screen.blit(self.titlefont.render("Level Select", True, self.Red), (self.width*0.12, self.height*0.15))
+            #level 1
+            self.screen.blit(self.font.render("Level I", True, self.Black) , (self.width*0.25,self.height*0.4))
+            #level 2 (not made)
+            self.screen.blit(self.font.render("LOCKED", True, self.Black) , (self.width*0.25,self.height*0.6))
+            #return
+            self.screen.blit(self.font.render("Return", True, self.Black) , (self.width*0.25,self.height*0.8))
+            
+        
+        #Options Menu
+        if self.MenuState == 2:
+            self.screen.fill(self.Black)
+             
+            if (self.width*0.25 <= mouse[0] <= self.width*0.75) and (self.height*0.4 <= mouse[1] <= self.height*0.9):
+                if self.height*0.4 <= mouse[1] <= self.height*0.5:
+                    self.buttonhighlighcount.append(0)
+                else:
+                    self.buttonhighlighcount.append(1)
+
+                if self.height*0.8 <= mouse[1] <= self.height*0.9:
+                    self.buttonhighlighcount.append(4)
+                else:
+                    self.buttonhighlighcount.append(5)    
+            
+                  
+
+            else:
+                self.buttonhighlighcount.append(1)
+                self.buttonhighlighcount.append(5)
+            self.buttonhighlighcount.append(3)
+            
+            
+            Menu.buttonhighlight(self)
+                            
+            for event in pygame.event.get():
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        #Resolution confirm
+                        if self.height*0.4 <= mouse[1] <= self.height*0.5:
                             print("click 1")
                             
 
@@ -161,24 +199,27 @@ class Menu:
 
                         #return
                         if self.height*0.8 <= mouse[1] <= self.height*0.9:
-                            print("Click 3")
+                            print("Return")
                             self.MenuState = 0
 
                             
 
             #Title
-            self.screen.blit(self.titlefont.render("Level Select", True, self.Red), (self.width*0.1, self.height*0.15))
-            #start/levels
-            self.screen.blit(self.font.render("Level I", True, self.Black) , (self.width*0.25,self.height*0.4))
-            #Options
-            self.screen.blit(self.font.render("LOCKED", True, self.Black) , (self.width*0.25,self.height*0.6))
-            #Quit
+            self.screen.blit(self.titlefont.render("Settings", True, self.Red), (self.width*0.23, self.height*0.15))
+            #Resolution select
+            self.screen.blit(self.font.render("Resolution", True, self.white) , (self.width*0.25,self.height*0.32))
+            
+            
+            self.screen.blit(self.font.render((current_resolution), True, self.Black) , (self.width*0.25,self.height*0.4))
+            self.screen.blit(self.font.render("Resolution", True, self.white) , (self.width*0.25,self.height*0.32))
+            #
+            self.screen.blit(self.font.render("Level Editor", True, self.Black) , (self.width*0.25,self.height*0.6))
+
+
+
+            #Return
             self.screen.blit(self.font.render("Return", True, self.Black) , (self.width*0.25,self.height*0.8))
             
-        
-        #Options Menu
-        if self.MenuState == 2:
-            pass
 
         pygame.display.update()
            

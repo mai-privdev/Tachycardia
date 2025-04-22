@@ -1,0 +1,8 @@
+{
+    "Resolution" : 1,
+    
+    "Resolution_1": [512, 288],
+    "Resolution_2": [896, 504],
+    "Resolution_3": [1280, 720],
+    "Resoultion_4": [1920, 1080]
+}

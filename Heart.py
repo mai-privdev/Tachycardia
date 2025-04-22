@@ -1,13 +1,16 @@
-import Tachycardia
+#Heart
+
 
 
 class Heart:
-    def __init__(self,RestBPM,MaxBPM):
+    def __init__(self,RestBPM,MaxBPM, font):
+        import Tachycardia
         self.RestBPM = RestBPM
         self.MaxBPM = MaxBPM
         self.CurrentBPM = self.RestBPM
         self.bloodcolour = (115, 0, 5)
         self.heartcolour = (255, 0, 0)
+        self.font = font
 
 
 
@@ -15,7 +18,7 @@ class Heart:
 
 
     def update(self):
-        text = font_necropsia.render(str(heart.CurrentBPM), True, self.bloodcolour, self.heartcolour)
+        text = self.font.render(str(heart.CurrentBPM), True, self.bloodcolour, self.heartcolour)
         textRect = text.get_rect()
         textRect.center = (GameX * 0.1, GameY * 0.9)
 

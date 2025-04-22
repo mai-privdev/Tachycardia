@@ -1,4 +1,3 @@
-
 GameState = 1
 #Gamestate = 1 means menu
 #= 2 means game
@@ -16,6 +15,7 @@ import Display
 pygame.display.init()
 pygame.font.init()
 #import TileSys
+print(pygame.font.get_fonts())
 
 
 #Colours
@@ -28,12 +28,13 @@ blue = (0, 0, 128)
 MenuX, MenuY= (400, 400)
 
 #Fonts
-titlefont_insomnia = pygame.font.Font('/home/mai/Documents/A level/Lessons/Computer Science Lessons/Lesson scripts/Project/Assets/Font/Insomnia 1.ttf', 40)
-font_insomnia = pygame.font.Font('/home/mai/Documents/A level/Lessons/Computer Science Lessons/Lesson scripts/Project/Assets/Font/Insomnia 1.ttf', 32)
-font_necropsia = pygame.font.Font('/home/mai/Documents/A level/Lessons/Computer Science Lessons/Lesson scripts/Project/Assets/Font/Necropsia.ttf', 32)
+titlefont_insomnia = pygame.font.Font('Assets/Font/Insomnia 1.ttf', 40)
+font_redundead = pygame.font.Font('Assets/Font/redundead.ttf', 24)
+font_necropsia = pygame.font.Font('Assets/Font/Necropsia.ttf', 32)
+font_arial = pygame.font.Font()
 
-Menu = Menu.Menu(font_insomnia, titlefont_insomnia, "Tachycardia")
-#heart = Heart.Heart(60,200)
+Menu = Menu.Menu(font_redundead, titlefont_insomnia, "Tachycardia")
+heart = Heart.Heart(60,200, font_necropsia)
 Display = Display.Display()
 
 #Display
@@ -73,9 +74,12 @@ MAIN GAME LOOPS
 
 #Menu()
 if GameState == 1:
+    Resolution_list = list(Display.resolution())
+    Resolution = str(Resolution_list[0]) + " X " + str(Resolution_list[1])
+    print(Resolution)
     Menu.load()   
     while GameState == 1:
-        GameState = Menu.update()
+        GameState = Menu.update(Resolution)
     print(GameState)
 
         
@@ -84,7 +88,7 @@ if GameState == 1:
 #Main game code        
 if GameState == 2:
     while GameState == 2:  
-        print("BOOBS")
+        print("")
         for event in pygame.event.get(): 
             #event checkers 
             # Quit to desktop

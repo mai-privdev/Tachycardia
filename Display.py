@@ -1,6 +1,8 @@
 #display
 class Display:
     def __init__(self):
+        #"current_resolution" is a 0-3 value, correspondng to the index of the self.resolutions tuple
+        self.current_resolution = 1
         self.game_x = 896
         self.game_y = 504
         self.menu_x = 400
@@ -12,7 +14,9 @@ class Display:
 
 
     def resolution(self):
-        return(self.game_x, self.game_y)
+        resolution = self.resolutions[self.current_resolution]
+        print(resolution)
+        return(resolution)
 
     def change_resolution(option):
         NewRes = self.resolutions[option]

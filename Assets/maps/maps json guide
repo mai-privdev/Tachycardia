@@ -1,0 +1,24 @@
+tilemap values
+array of 0 to 6(+) x A to D
+
+
+
+
+
+    A   B   C   D
+#Walls
+                _
+0    | |    _
+    _           _
+1    |  _| |_  |
+    _   _       _
+2   _| |_  |_| | |
+        _   _
+3   x  |_|  _  | |
+
+#Player directions
+4   V   <   >   ^
+            _
+5 c[_] {Z} (β)  ☏
+
+6 fire /// drk1 drk2
