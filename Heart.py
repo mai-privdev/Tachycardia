@@ -1,5 +1,6 @@
 #Heart
-
+import pygame
+pygame.display.init()
 
 
 class Heart:
@@ -13,14 +14,11 @@ class Heart:
         self.font = font
 
 
-
-
-
-
-    def update(self):
-        text = self.font.render(str(heart.CurrentBPM), True, self.bloodcolour, self.heartcolour)
+    def update():
+        text = self.font.render(str(self.CurrentBPM), True, self.bloodcolour, self.heartcolour)
         textRect = text.get_rect()
-        textRect.center = (GameX * 0.1, GameY * 0.9)
+        textRect.center = (896 * 0.1, 504 * 0.9)
+        Display.screen.blit(text, textRect)
 
     def relax(self):
         if self.CurrentBPM < 60:

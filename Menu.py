@@ -1,5 +1,5 @@
 #Menu
-import pygame, sys, numpy, json
+import pygame, sys, json
 from pygame.locals import *
 pygame.init()
 

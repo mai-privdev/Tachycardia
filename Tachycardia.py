@@ -39,10 +39,6 @@ Display = Display.Display()
 
 #Display
 
-
-
-
- 
 # Background clock
 globalclock = pygame.time.Clock()
 time = 0
@@ -88,7 +84,7 @@ if GameState == 1:
 #Main game code        
 if GameState == 2:
     while GameState == 2:  
-        print("")
+        Display.load()
         for event in pygame.event.get(): 
             #event checkers 
             # Quit to desktop
@@ -126,9 +122,9 @@ if GameState == 2:
         #print(round(time, 5))
 
         #updates heartrate
-        heart.update()
         #display
-        game_screen.blit(text, textRect)
+        
+        heart.update()        
         #screen update
         pygame.display.update()
 
