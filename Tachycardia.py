@@ -15,7 +15,7 @@ import Display
 import TileSys
 pygame.display.init()
 pygame.font.init()
-#import TileSys
+
 
 
 
@@ -33,7 +33,7 @@ titlefont_insomnia = pygame.font.Font('Assets/Font/Insomnia 1.ttf', 40)
 font_redundead = pygame.font.Font('Assets/Font/redundead.ttf', 24)
 font_necropsia = pygame.font.Font('Assets/Font/Necropsia.ttf', 28)
 font_arial = pygame.font.Font()
-spritesheet = Spritesheet('')
+#spritesheet = Spritesheet('')
 
 Display = Display.Display(font_necropsia, font_redundead, titlefont_insomnia, "Resolution_1")
 
@@ -90,7 +90,7 @@ if GameState == 1:
         if GameState != 2:
             Display.change_resolution(Menu.change_resolution)
             Display.change_framerate(Menu.change_framerate)
-        selected_map = Display.selected_map
+        selected_map = Menu.selected_map
         
 
 
@@ -98,10 +98,10 @@ if GameState == 1:
 if GameState == 2:
     pygame.display.set_caption("Tachycardia")
     Display.load()
-    Tile_map = TileSys.Tileset(selected_map, Display.resolution) 
+    #Tile_map = TileSys.Tileset(selected_map, Display.resolution) 
     Paused = False
-    if selected_map == 0:
-        Map = TileMap("/Assets/maps/map_0.json",)
+    #if selected_map == 0:
+        #Map = TileMap("/Assets/maps/map_0.json",)
     #game loop
     while GameState == 2: 
         Display.clear()
@@ -145,7 +145,7 @@ if GameState == 2:
         seconds = milli/1000.
         time += seconds
 
-        Map.draw_map(Display.screen)
+        #Map.draw_map(Display.screen)
         #updates heart on hud
         Display.heart_update(Heart.CurrentBPM)        
         #screen update    
