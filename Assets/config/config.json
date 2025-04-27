@@ -1,1 +1,1 @@
-{"Resolution": 1, "Resolution_0": [512, 288], "Resolution_1": [896, 504], "Resolution_2": [1280, 720], "Resolution_3": [1920, 1080]}
+{"Resolution": 0, "Resolution_0": [512, 288], "Resolution_1": [896, 504], "Resolution_2": [1280, 720], "Resolution_3": [1920, 1080], "framerate": "1", "framerate_0": 30, "framerate_1": 60, "framerate_2": 90, "framerate_3": 120}

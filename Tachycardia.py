@@ -12,6 +12,7 @@ pygame.init()
 import Heart
 import Menu
 import Display
+import TileSys
 pygame.display.init()
 pygame.font.init()
 #import TileSys
@@ -56,6 +57,12 @@ Calm = False
 
 #Functions
 
+def Pause(Paused):
+    while Paused == True:
+        Paused = Display.pause_menu()
+        print(Paused)
+    else:
+        return()
 
 def Stressed(Calm):
     Calm = False
@@ -74,21 +81,24 @@ MAIN GAME LOOPS
 if GameState == 1:
     Menu.load()   
     while GameState == 1:
+        Framerate = Display.framerate
         resolution_x, resolution_y = Display.game_x, Display.game_y
         Resolution = str(resolution_x) + " X " + str(resolution_y)
-        GameState = Menu.update(Resolution)
+        GameState = Menu.update(Resolution, Framerate)
         if GameState != 2:
             Display.change_resolution(Menu.change_resolution)
-        
-    print(GameState)
+            Display.change_framerate(Menu.change_framerate)
 
         
 
 
 #Main game code        
 if GameState == 2:
-    Display.load() 
-    while GameState == 2:  
+    Display.load()
+    #Tile_map = TileSys.TileMap() 
+    Paused = False
+    #game loop
+    while GameState == 2: 
         for event in pygame.event.get(): 
             #event checkers 
             # Quit to desktop
@@ -109,6 +119,11 @@ if GameState == 2:
                 Calm = True
             #test scare input
             if event.type == pygame.locals.KEYUP:
+                if event.key == K_ESCAPE:
+                    Paused = True
+                    Paused = Pause(Paused)
+                    
+
                 if event.key == K_x:
                     Heart.heartfear()
                     Stressed(Calm)    
@@ -124,11 +139,11 @@ if GameState == 2:
         seconds = milli/1000.
         time += seconds
         #print(round(time, 5))
-
+        Display.update()
         #updates heart on hud
         Display.heart_update(Heart.CurrentBPM)        
         #screen update    
-        pygame.display.update()
+        
 
 
 if GameState == 0:

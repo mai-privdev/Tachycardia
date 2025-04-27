@@ -1,6 +1,7 @@
 { "compressionlevel":-1,
  "height":16,
  "infinite":false,
+ "spawn" : [3,3],
  "layers":[
         {
          "data":[19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19,
