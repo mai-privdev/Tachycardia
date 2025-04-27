@@ -23,6 +23,7 @@ class Menu:
         #1 = Level Menu
         #2 = Settings Menu
         self.MenuState = ()
+        self.selected_map = 0
         self.change_resolution = []
         self.change_framerate = []
          
@@ -159,6 +160,7 @@ class Menu:
                         if self.width*0.25 <= mouse[0] <= self.width*0.75:
                             #lvl 1
                             if self.height*0.4 <= mouse[1] <= self.height*0.5:
+                                self.selected_map = 0
                                 return(2)
                             #Lvl 2 (Doesnt exist)
                             if self.height*0.6 <= mouse[1] <= self.height*0.7:

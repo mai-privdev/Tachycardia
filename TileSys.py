@@ -1,11 +1,5 @@
-import pygame, sys, numpy, json
-from pygame.locals import *
-pygame.init()
+import pygame, json
 
-class Tileset:
-    def __init__(self):
-        self.math
-#Tilemap is made of 2d arrays
 class PlayerPosition:
     def __init__(self, player_x, player_y):
         self.player = 1
@@ -22,56 +16,40 @@ class PlayerPosition:
             self.player_y += distance
 
 
-class Tile:
-    def __init__(self, texture, tile_x, tile_y, sprite_sheet):
-        self.image = pygame.image.load(image) 
-        self.sprite = self.image.get_rect()
-        self.sprite_x, self.sprite_y = tile_x, tile_y
 
-    def load(self, surface):
-        surface.blit(self.image, (self.sprite_x, self.sprite_y))
-
-
-class TileMap():
-    def __init__(self, filename, sprite_sheet, selected_map):
-        with open("Assets/maps/map_"+ str(selected_map) +".json", "r") as map_file:
+#Tilemap is made of 2d arrays
+class Tileset:
+    def __init__(self, selected_map, resolution):
+        self.resolution_x, self.resolution_y = resolution
+        self.selected_map = selected_map
+        with open("/Assets/maps/map_" + selected_map +".json", "r") as map_file:
             self.map = json.load(map_file)
-        self.spawn_x, self.spawn_y = self.map["spawn"]
-        self.sprite_sheet = sprite_sheet
-        self.tiles = self.tile_load(filename)
-        self.map_surface = pygame.Surface((self.map["width"], self.map["height"]))
-        self.map_surface.set_colorkey((0, 0, 0))
-        self.tile_size = 16 #16x16 squares
-        self.load_map()
-
-    def draw_map(self, surface):
-        surface.blit(self.map_surface, (0, 0))
-
+        self.spawn_x, self.spawn_y = self.map["Spawn"]
+        self.tiles = tile.load
+        self.surface = pygame.Surface(self.map["width"], self.map["length"])
+        self.tile_size = 16
+        self.load_map
+    
+    def print_map(self, surface):
+        surface.blit(self.surface,(int(self.resolution_x)/16*3.5,0))
+    
     def load_map(self):
         for tile in self.tiles:
-            tile_load(self.map_surface)
+            tile_load(self.surface)
 
     def tile_load(self, file):
         tiles = []
         map = self.map
-        x, y = 0, 0
-        for row in map:
-            x = 0
+        tile_x, tile_y = 0, 0
+        for row in map["data"]:
+            tile_x = 0
             for tile in row:
-                if tile == '0':
-                    self.start_x, self.start_y = x * self.tile_size, y * self.tile_size
-                elif tile == '1':
-                    tiles.append(Tile('grass.png', x * self.tile_size, y * self.tile_size, self.spritesheet))
-                elif tile == '2':
-                    tiles.append(Tile('grass2.png', x * self.tile_size, y * self.tile_size, self.spritesheet))
-                    # Move to next tile in current row
-                x += 1
-
-            # Move to next row
-            y += 1
-            # Store the size of the tile map
-        self.map_w, self.map_h = x * self.tile_size, y * self.tile_size
-        return tiles
-
-
-
+                if tile == "0":
+                    tiles.append(Tile('floor.png', tile_x * self.tile_size, tile_y * self.tile_size, self.sprite_sheet))
+                if tile == "19":
+                    tiles.append(Tile('wall.png',  tile_x * self.tile_size, tile_y * self.tile_size, self.sprite_sheet))
+                if tile == "27":
+                    tiles.append(Tile('door.png',  tile_x * self.tile_size, tile_y * self.tile_size, self.sprite_sheet))
+                tile_x += 1
+            tile_y += 1
+        return(tiles)
