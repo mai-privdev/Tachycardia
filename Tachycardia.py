@@ -31,7 +31,7 @@ MenuX, MenuY= (400, 400)
 #Fonts
 titlefont_insomnia = pygame.font.Font('Assets/Font/Insomnia 1.ttf', 40)
 font_redundead = pygame.font.Font('Assets/Font/redundead.ttf', 24)
-font_necropsia = pygame.font.Font('Assets/Font/Necropsia.ttf', 32)
+font_necropsia = pygame.font.Font('Assets/Font/Necropsia.ttf', 28)
 font_arial = pygame.font.Font()
 
 Display = Display.Display(font_necropsia, font_redundead, titlefont_insomnia, "Resolution_1")
@@ -99,6 +99,7 @@ if GameState == 2:
     Paused = False
     #game loop
     while GameState == 2: 
+        Display.clear()
         for event in pygame.event.get(): 
             #event checkers 
             # Quit to desktop
@@ -138,12 +139,12 @@ if GameState == 2:
         milli = globalclock.tick()  #clock.tick() returns how many milliseconds passed since the last time it was called
         seconds = milli/1000.
         time += seconds
-        #print(round(time, 5))
-        Display.update()
+
+
         #updates heart on hud
         Display.heart_update(Heart.CurrentBPM)        
         #screen update    
-        
+        Display.update()
 
 
 if GameState == 0:

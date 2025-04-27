@@ -27,7 +27,7 @@ class Display:
         self.bloodcolour = (115, 0, 5)
         self.heartcolour = (255, 0, 0)
         self.black = (0,0,0)
-        self.heart_background = pygame.image.load("Assets/Non Map Sprites/heart_background.png")
+        self.heart_background = pygame.transform.scale(pygame.image.load("Assets/Non Map Sprites/heart_background.png"), (self.game_x/8, self.game_y/4.5))
         
 
     def update_resolution(self):
@@ -83,15 +83,17 @@ class Display:
         self.screen = pygame.display.set_mode((self.game_x, self.game_y))
         self.active_state = 0
 
-    def update(self):
+    def clear(self):
         self.screen.fill(self.black)
+        
+    def update(self):
         pygame.display.update()
 
     def heart_update(self, CurrentBPM):
-        self.screen.blit(self.heart_background, (self.game_x*0.1, self.game_y*0.9))
-        BPM = self.font_2.render(str(CurrentBPM), True, self.bloodcolour, self.heartcolour)
+        self.screen.blit(self.heart_background, (self.game_x*0.04, self.game_y*0.8))
+        BPM = self.font_2.render(str(CurrentBPM), False, self.heartcolour)
         BPM_rect = BPM.get_rect()
-        BPM_rect.center = (self.game_x * 0.1, self.game_y * 0.9)
+        BPM_rect.center = (self.game_x * 0.1, self.game_y * 0.885)
         self.screen.blit(BPM, BPM_rect)
         self.clock.tick(self.framerate)
 
