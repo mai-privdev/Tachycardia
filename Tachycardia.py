@@ -15,7 +15,7 @@ import Display
 pygame.display.init()
 pygame.font.init()
 #import TileSys
-print(pygame.font.get_fonts())
+
 
 
 #Colours
@@ -33,9 +33,11 @@ font_redundead = pygame.font.Font('Assets/Font/redundead.ttf', 24)
 font_necropsia = pygame.font.Font('Assets/Font/Necropsia.ttf', 32)
 font_arial = pygame.font.Font()
 
+Display = Display.Display(font_necropsia, font_redundead, titlefont_insomnia, "Resolution_1")
+
 Menu = Menu.Menu(font_redundead, titlefont_insomnia, "Tachycardia")
-heart = Heart.Heart(60,200, font_necropsia)
-Display = Display.Display()
+Heart = Heart.Heart()
+
 
 #Display
 
@@ -60,7 +62,7 @@ def Stressed(Calm):
     print("calming")
     #turns off homeostasis for 5 seconds
     pygame.event.set_blocked(HOMEOSTAIS)
-    pygame.time.set_timer(STEADY, 5000) #countdown til heart begins to decrease
+    pygame.time.set_timer(STEADY, 5000) #countdown til Heart begins to decrease
     return(Calm)
 
 ''' 
@@ -70,12 +72,14 @@ MAIN GAME LOOPS
 
 #Menu()
 if GameState == 1:
-    Resolution_list = list(Display.resolution())
-    Resolution = str(Resolution_list[0]) + " X " + str(Resolution_list[1])
-    print(Resolution)
     Menu.load()   
     while GameState == 1:
+        resolution_x, resolution_y = Display.game_x, Display.game_y
+        Resolution = str(resolution_x) + " X " + str(resolution_y)
         GameState = Menu.update(Resolution)
+        if GameState != 2:
+            Display.change_resolution(Menu.change_resolution)
+        
     print(GameState)
 
         
@@ -83,8 +87,8 @@ if GameState == 1:
 
 #Main game code        
 if GameState == 2:
+    Display.load() 
     while GameState == 2:  
-        Display.load()
         for event in pygame.event.get(): 
             #event checkers 
             # Quit to desktop
@@ -100,13 +104,13 @@ if GameState == 2:
                 print("Calm = true")
             #homeostasis 1 sec tick loop
             if event.type == HOMEOSTAIS:
-                heart.relax()
+                Heart.relax()
                 print("relax")
                 Calm = True
             #test scare input
             if event.type == pygame.locals.KEYUP:
                 if event.key == K_x:
-                    heart.heartfear()
+                    Heart.heartfear()
                     Stressed(Calm)    
         
         if Calm == True:
@@ -121,11 +125,9 @@ if GameState == 2:
         time += seconds
         #print(round(time, 5))
 
-        #updates heartrate
-        #display
-        
-        heart.update()        
-        #screen update
+        #updates heart on hud
+        Display.heart_update(Heart.CurrentBPM)        
+        #screen update    
         pygame.display.update()
 
 

@@ -4,21 +4,11 @@ pygame.display.init()
 
 
 class Heart:
-    def __init__(self,RestBPM,MaxBPM, font):
+    def __init__(self):
         import Tachycardia
-        self.RestBPM = RestBPM
-        self.MaxBPM = MaxBPM
+        self.RestBPM = 60
+        self.MaxBPM = 200
         self.CurrentBPM = self.RestBPM
-        self.bloodcolour = (115, 0, 5)
-        self.heartcolour = (255, 0, 0)
-        self.font = font
-
-
-    def update():
-        text = self.font.render(str(self.CurrentBPM), True, self.bloodcolour, self.heartcolour)
-        textRect = text.get_rect()
-        textRect.center = (896 * 0.1, 504 * 0.9)
-        Display.screen.blit(text, textRect)
 
     def relax(self):
         if self.CurrentBPM < 60:
